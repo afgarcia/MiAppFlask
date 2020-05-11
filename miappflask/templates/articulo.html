@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block title %}Articulo: {{ articulo.name }}{% endblock %}
+
+{% block page_content %}
+<div class="page-header">
+    <h1>Articulo: {{ articulo.name }}</h1>
+</div>
+<div class="col-md-8">
+    {{ articulo.description }}
+</div>
+<div class="col-md-4">
+    <ul>
+        {% for articulo in articulos %}
+        <li><a href="{{ url_for('get_articulo', id=articulo.id) }}">{{ articulo.name }}</a></li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}
+
