@@ -7,8 +7,15 @@
     <h1>Articulos</h1>
 </div>
 <div class="col-md-8">
+    <ul class="list-group">
     {% for articulo in articulos %}
-    <div><a href="{{ url_for('get_articulo', id=articulo.id) }}">{{ articulo.name }}</a></div>
+    <li class="list-group-item">
+    <td>{{ articulo.name }}</td>
+    <td><a href="{{url_for('get_articulo',id=articulo.id)}}"><span class="glyphicon glyphicon-eye-open"></span> Visualizar</a></td>
+    <td><a href="{{url_for('update_articulo',id=articulo.id)}}"><span class="glyphicon glyphicon-edit"></span> Editar</a></td>
+    <td><a href="{{url_for('delete_articulo',id=articulo.id)}}"><span class="glyphicon glyphicon-trash"></span> Borrar</a></td>
+    </li>
     {% endfor %}
+    </ul>
 </div>
 {% endblock %}

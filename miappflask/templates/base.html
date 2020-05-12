@@ -21,10 +21,10 @@
             {% endif %}
             <ul class="nav navbar-nav navbar-right">
                 {% if current_user.is_authenticated %}
-                <li><a href="{{ url_for('logout') }}">Log Out</a></li>
+                <li><a href="{{ url_for('logout') }}">Cerrar sesión</a></li>
                 {% else %}
-                <li><a href="{{ url_for('login') }}">Log In</a></li>
-                <li><a href="{{ url_for('register') }}">Register</a></li>
+                <li><a href="{{ url_for('login') }}">Iniciar sesión</a></li>
+                <li><a href="{{ url_for('register') }}">Registrar</a></li>
                 {% endif %}
             </ul>
         </div>

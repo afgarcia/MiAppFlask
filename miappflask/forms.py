@@ -18,6 +18,7 @@ class RegisterForm(FlaskForm):
             raise ValidationError('Nombre de usuario ya está en uso.')
 
 
+
 class LoginForm(FlaskForm):
     username = StringField('Usuario', validators=[DataRequired()])
     password = PasswordField('Contraseña', validators=[DataRequired()])
@@ -29,3 +30,10 @@ class AddArticuloForm(FlaskForm):
     name = StringField('Nombre', validators=[DataRequired()])
     description = TextAreaField('Descripción', validators=[DataRequired()])
     submit = SubmitField('Guardar')
+
+
+
+class UpdateArticuloForm(FlaskForm):
+    name = StringField('Nuevo Nombre', validators=[DataRequired()])
+    description = TextAreaField('Nueva Descripción', validators=[DataRequired()])
+    submit = SubmitField('Modificar')

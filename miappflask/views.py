@@ -2,7 +2,7 @@ from flask import render_template, redirect, flash, url_for
 from flask_login import login_required, login_user, logout_user, current_user
 
 from miappflask import app
-from miappflask.forms import AddArticuloForm, LoginForm, RegisterForm
+from miappflask.forms import AddArticuloForm, UpdateArticuloForm, LoginForm, RegisterForm
 from miappflask.models import db, User, Articulo
 
 
@@ -55,6 +55,18 @@ def get_articulo(id):
         return render_template('403.html'), 403
     return render_template('articulo.html', articulo=articulo, articulos=articulos)
 
+@app.route('/Articulos/<int:id>/delete')
+@login_required
+def delete_articulo(id):
+    articulo = Articulo.query.filter_by(id=id).first()
+    if articulo is None:
+        return render_template('404.html'), 404
+    if articulo.user != current_user:
+        return render_template('403.html'), 403
+    db.session.delete(articulo)
+    db.session.commit()
+    flash('Tu articulo ha sido borrado')
+    return redirect(url_for('get_articulos'))
 
 @app.route('/articulos')
 @login_required
@@ -76,3 +88,23 @@ def add_articulo():
         flash('Tu articulo ha sido guardado')
         return redirect(url_for('get_articulos'))
     return render_template('add_articulo.html', form=form)
+
+@app.route('/Articulos/<int:id>/update', methods=['GET', 'POST'])
+@login_required
+def update_articulo(id):
+    form = UpdateArticuloForm()
+    
+    articulo = Articulo.query.filter_by(id=id).first()
+    if articulo is None:
+        return render_template('404.html'), 404
+    if articulo.user != current_user:
+        return render_template('403.html'), 403
+
+    if form.validate_on_submit():
+        articulo.name = form.name.data
+        articulo.description = form.description.data
+        db.session.commit()
+        flash('Tu articulo ha sido modificado')
+        return redirect(url_for('get_articulos'))
+
+    return render_template('update_articulo.html', articulo=articulo, form=form)
