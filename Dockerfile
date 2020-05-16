@@ -32,5 +32,5 @@ USER appuser
 # CMD ["gunicorn", "--bind", "0.0.0.0:5000", "__init__:app"]
 RUN export FLASK_APP=miappflask
 
-#CMD ["flask", "create_all"]
+RUN ["flask", "create_all"]
 CMD ["flask", "run"]
