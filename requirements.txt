@@ -9,7 +9,7 @@ Flask-SQLAlchemy==2.3.2
 Flask-WTF==0.14.2
 humanfriendly==4.12.1
 itsdangerous==0.24
-Jinja2==2.10.1
+Jinja2==2.11.3
 MarkupSafe==1.1.1
 requirements-parser==0.2.0
 six==1.12.0
